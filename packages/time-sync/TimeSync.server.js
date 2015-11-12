@@ -13,7 +13,7 @@ class TimeSync {
 
     syncNow(sessionId) {
 
-        let message = this._protocol.messageTimeSyncRequest(0);
+        let message = this._protocol.getMessage('timeSyncRequest', 0);
         this._measurements[0] = { serverTimestamp: Date.now() };
         Meteor.directStream.send(message, sessionId);
 

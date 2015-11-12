@@ -1,13 +1,12 @@
 class TimeSync {
 
     constructor() {
-        Meteor.directStream.registerMessageHandler(function(message) {
-            console.log(message);
-            if (JSON.parse(message).syncId !== undefined) {
-                console.log('prevent');
-                this.preventMeteorHandler();
-            }
-        });
+        this._protocol = new TimeSyncProtocol();
+        this._protocol.registerCallback('timeSyncRequest', this.respondToSyncRequest);
+    }
+
+    respondToSyncRequest(message) {
+        console.log(message);
     }
 
     syncNow() {

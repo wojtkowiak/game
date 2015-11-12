@@ -14,7 +14,7 @@ Package.onUse(function(api) {
   api.versionsFrom('1.1.0.2');
   api.use('ecmascript');
   api.use('omega:direct-stream-access');
-  api.addFiles('custom-protocol.js');
+  api.addFiles('CustomProtocol.js');
   api.export('CustomProtocol');
 });
 
