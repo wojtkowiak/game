@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'omega:custom-protocol',
+  name: 'omega:time-sync',
   version: '0.0.1',
   // Brief, one-line summary of the package.
   summary: '',
@@ -13,13 +13,18 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.1.0.2');
   api.use('ecmascript');
+  api.use('omega:custom-protocol');
   api.use('omega:direct-stream-access');
-  api.addFiles('CustomProtocol.js');
-  api.export('CustomProtocol');
+  api.addFiles('TimeSyncProtocol.js');
+  api.addFiles('TimeSync.client.js', 'client');
+  api.addFiles('TimeSync.server.js', 'server');
+  api.export('TimeSync');
 });
 
 Package.onTest(function(api) {
   api.use('ecmascript');
   api.use('tinytest');
-  api.use('omega:custom-protocol');
+
+  api.use('omega:time-sync');
+  //api.addFiles('time-sync-tests.js');
 });
