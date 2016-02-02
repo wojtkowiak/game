@@ -20,7 +20,7 @@ CustomProtocolCommon = class CustomProtocolCommon {
         }
     }
 
-    registerCallback(messageId, callback) {
+    on(messageId, callback) {
         CustomProtocolCore.registerCallback(this._id, messageId, callback);
     }
 

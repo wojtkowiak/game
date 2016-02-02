@@ -7,8 +7,8 @@ class TimeSyncCore {
         console.log(CustomProtocolCore);
 
         this._protocol = new TimeSyncProtocol();
-        this._protocol.registerCallback(this._protocol.TIME_SYNC_SYNC_NOW, this._syncNow.bind(this));
-        this._protocol.registerCallback(this._protocol.TIME_SYNC_RESPONSE, Meteor.bindEnvironment(this._processSyncResponse.bind(this)));
+        this._protocol.on(this._protocol.TIME_SYNC_SYNC_NOW, this._syncNow.bind(this));
+        this._protocol.on(this._protocol.TIME_SYNC_RESPONSE, Meteor.bindEnvironment(this._processSyncResponse.bind(this)));
 
         this._measurements = [];
         this._options = {};

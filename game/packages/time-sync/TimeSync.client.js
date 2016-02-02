@@ -3,8 +3,8 @@ class TimeSyncCore {
     constructor() {
         this._protocol = new TimeSyncProtocol();
 
-        this._protocol.registerCallback(this._protocol.TIME_SYNC_REQUEST, this._respondToSyncRequest.bind(this));
-        this._protocol.registerCallback(this._protocol.TIME_SYNC_OFFSET, this._processTimeOffset.bind(this));
+        this._protocol.on(this._protocol.TIME_SYNC_REQUEST, this._respondToSyncRequest.bind(this));
+        this._protocol.on(this._protocol.TIME_SYNC_OFFSET, this._processTimeOffset.bind(this));
     }
 
     _processTimeOffset(message) {

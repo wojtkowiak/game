@@ -1,7 +1,7 @@
 Meteor.startup(() => {
 
-    TimeSync.configure({
+    /*TimeSync.configure({
        mode: "manual"
-    });
+    });*/
 
 });

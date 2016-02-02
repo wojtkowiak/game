@@ -6,7 +6,7 @@ class CustomProtocolCoreClass {
 
 
         // Register handler for hooking up to the Meteor server. All incoming socket messages will now go through this class first.
-        Meteor.directStream.registerMessageHandler(function messageHandler() {
+        Meteor.directStream.onMessage(function messageHandler() {
             self._messageHandler(this, ...arguments)
         });
     }
@@ -20,12 +20,16 @@ class CustomProtocolCoreClass {
      * @param sessionId
      */
     _messageHandler(directStreamHandle, message, sessionId) {
-        if (message.charCodeAt(0) & 1 == 1) { console.log('standard ddp'); } else {
+        if (message.charCodeAt(0) & 1 == 1) { console.log('standard ddp: ' + message); } else {
             let protocolId = message.charCodeAt(0) >> 1;
             let messageId = message.charCodeAt(1);
-            console.log('custom protocol id ' + protocolId + ' message ' + messageId);
-            this._fireMessageCallbacks(protocolId, messageId, sessionId, message.substr(2));
-            directStreamHandle.preventCallingMeteorHandler();
+            if (!this._customProtocols[protocolId]) {
+                console.warn(`Received a message for unknown custom protocol: ${protocolId}. The message was: ${message}`);
+            } else {
+                console.log('custom protocol id ' + protocolId + ' message ' + messageId + ' dump: ' + message);
+                this._fireMessageCallbacks(protocolId, messageId, sessionId, message.substr(2));
+                directStreamHandle.preventCallingMeteorHandler();
+            }
         }
     }
 
@@ -44,13 +48,9 @@ class CustomProtocolCoreClass {
         if (!callbacks.length) return;
         let message = this._customProtocols[protocolId].protocol.decode(messageId, rawMessage);
         if (sessionId !== undefined) {
-            for (let callback of callbacks) {
-                callback(sessionId, message);
-            }
+            callbacks.forEach(callback => callback(sessionId, message));
         } else {
-            for (let callback of callbacks) {
-                callback(message);
-            }
+            callbacks.forEach(callback => callback(message));
         }
     }
 

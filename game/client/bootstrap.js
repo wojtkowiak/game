@@ -1,6 +1,12 @@
+Template.body.helpers({
+    transfer: () => {
+        return transferRateMonitor.getTransferRate();
+    }
+})
+
 Meteor.startup(() => {
 
-    /*Meteor.directStream.registerMessageHandler(function(message) {
+    /*Meteor.directStream.onMessage(function(message) {
         console.log('callback: ' + message);
         //this.preventCallingMeteorHandler();
 
@@ -9,9 +15,9 @@ Meteor.startup(() => {
 
 
     Tracker.autorun(() => {
-        if (Meteor.sessionManager.token.get()) {
+       /* if (Meteor.sessionManager.token.get()) {
 
-        }
+        }*/
     })
 
 
