@@ -19,6 +19,7 @@ Package.onUse(function(api) {
   api.addFiles('TimeSync.client.js', 'client');
   api.addFiles('TimeSync.server.js', 'server');
   api.export('TimeSync');
+
 });
 
 Package.onTest(function(api) {

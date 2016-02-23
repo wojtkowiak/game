@@ -47,11 +47,7 @@ class CustomProtocolCoreClass {
         let callbacks = this._customProtocols[protocolId].messages[messageId].callbacks;
         if (!callbacks.length) return;
         let message = this._customProtocols[protocolId].protocol.decode(messageId, rawMessage);
-        if (sessionId !== undefined) {
-            callbacks.forEach(callback => callback(sessionId, message));
-        } else {
-            callbacks.forEach(callback => callback(message));
-        }
+        callbacks.forEach(callback => callback(message, sessionId));
     }
 
     /**
@@ -61,11 +57,11 @@ class CustomProtocolCoreClass {
      * @param {CustomProtocol} protocol - Instance of a class extending the CustomProtocol.
      * @throws {CustomProtocolError} Will throw an error when protocolId was already used or when the class instance is not a CustomProtocol instance.
      */
-    registerProtocol(protocolId, protocol) {
+    registerProtocol(protocolId, options, protocol) {
         if (!(protocol instanceof CustomProtocol)) throw new CustomProtocolError(0, protocolId);
         if (this._customProtocols[protocolId]) throw new CustomProtocolError(1, protocolId);
 
-        this._customProtocols[protocolId] = { protocol: protocol, messages: {}};
+        this._customProtocols[protocolId] = { protocol: protocol, messages: {}, options: options };
     }
 
     /**

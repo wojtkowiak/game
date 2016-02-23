@@ -46,7 +46,7 @@ class TimeSyncCore {
 
     _sendRequest(syncId, sessionId) {
         this._measurements[syncId] = { serverTimestamp: Date.now() };
-        this._protocol.send(this._protocol.TIME_SYNC_REQUEST, sessionId, syncId);
+        this._protocol.send(this._protocol.TIME_SYNC_REQUEST, syncId, sessionId);
     }
 
     _processSyncResponse(sessionId, message) {
@@ -88,7 +88,7 @@ class TimeSyncCore {
 
         // Send the offset to client
 
-        Meteor.defer(() => { this._protocol.send(this._protocol.TIME_SYNC_OFFSET, sessionId, this._average(this._offsets)); });
+        Meteor.defer(() => { this._protocol.send(this._protocol.TIME_SYNC_OFFSET, this._average(this._offsets), sessionId); });
 
         // Store sent offsets so we can later for example check for big offsets change (time on the client will shift).
         // Big changes of the time on the client might be catastrophic.

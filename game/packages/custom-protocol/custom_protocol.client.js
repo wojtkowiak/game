@@ -4,8 +4,8 @@ CustomProtocol = class CustomProtocol extends CustomProtocolCommon {
         super();
     }
 
-    send(messageId, ...payload) {
-        Meteor.directStream.send(this.getMessage(messageId, ...payload));
+    send(messageId, payload) {
+        Meteor.directStream.send(this.getMessage(messageId, payload));
     }
 
 };

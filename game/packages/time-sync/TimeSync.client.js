@@ -14,7 +14,7 @@ class TimeSyncCore {
     }
 
     _respondToSyncRequest(message) {
-        this._protocol.send(this._protocol.TIME_SYNC_RESPONSE, message.syncId, Date.now());
+        this._protocol.send(this._protocol.TIME_SYNC_RESPONSE, [ message.syncId, Date.now() ]);
     }
 
     syncNow() {
