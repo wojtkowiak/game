@@ -1,24 +1,12 @@
-Template.body.helpers({
-    transfer: () => {
-        return transferRateMonitor.getTransferRate();
-    }
-})
 
 Meteor.startup(() => {
-
-    /*Meteor.directStream.onMessage(function(message) {
-        console.log('callback: ' + message);
-        //this.preventCallingMeteorHandler();
-
-    });*/
-
-
-
+    transferRateMonitor.subscribeForServerTransferRate();
     Tracker.autorun(() => {
+        console.log('poszedl autorun');
+
        /* if (Meteor.sessionManager.token.get()) {
 
         }*/
     })
-
 
 });

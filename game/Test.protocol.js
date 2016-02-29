@@ -1,0 +1,6 @@
+class TestProtocol extends JsonProtocol {
+
+
+
+
+}

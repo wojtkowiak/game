@@ -28,5 +28,4 @@ TimeSyncProtocol = class TimeSyncProtocol extends CustomProtocol {
     decode(messageId, message) {
         return JSON.parse(message);
     }
-
 };

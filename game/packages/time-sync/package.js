@@ -15,7 +15,7 @@ Package.onUse(function(api) {
   api.use('ecmascript');
   api.use('omega:custom-protocol');
   api.use('omega:direct-stream-access');
-  api.addFiles('TimeSyncProtocol.js');
+  api.addFiles('TimeSync.protocol.js');
   api.addFiles('TimeSync.client.js', 'client');
   api.addFiles('TimeSync.server.js', 'server');
   api.export('TimeSync');
