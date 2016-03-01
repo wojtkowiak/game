@@ -2,7 +2,6 @@ TimeSyncProtocol = class TimeSyncProtocol extends CustomProtocol {
 
     constructor() {
         super();
-        this._id = 1;
         this.TIME_SYNC_REQUEST = 1;
         this.TIME_SYNC_RESPONSE = 2;
         this.TIME_SYNC_SYNC_NOW = 3;
@@ -28,4 +27,5 @@ TimeSyncProtocol = class TimeSyncProtocol extends CustomProtocol {
     decode(messageId, message) {
         return JSON.parse(message);
     }
+
 };
